@@ -1,5 +1,7 @@
 body {
-  background-image: "/";
+  background-image: "../docs/assets/imgs/tattoo.png";
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 canvas {
