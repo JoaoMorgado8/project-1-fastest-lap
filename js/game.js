@@ -25,7 +25,7 @@ class Game {
   }
 
   start() {
-    this.car = new Player(this, 200, 450, 50, 50, "purple");
+    this.car = new Player(this, 175, 550, 75, 75, "purple");
     this.controls = new Controls(this);
     this.controls.keyboardEvents();
     this.intervalId = setInterval(() => {
@@ -37,5 +37,16 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.frames++;
     this.car.draw();
+    this.createObstacles();
+    this.enemies.forEach((enemy) => {
+      enemy.y++;
+      enemy.draw();
+    });
+  }
+
+  createObstacles() {
+    if (this.frames % 200 === 0) {
+      this.enemies.push(new Obstacle(this));
+    }
   }
 }
