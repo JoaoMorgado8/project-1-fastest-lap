@@ -39,6 +39,13 @@ class Game {
     this.car.draw();
     this.createObstacles();
     this.enemies.forEach((enemy) => {
+      if (this.car.y < 100) {
+        enemy.y += 25;
+      } else if (this.car.y < 300) {
+        enemy.y += 10;
+      } else if (this.car.y < 460) {
+        enemy.y += 5;
+      }
       enemy.y++;
       enemy.draw();
     });

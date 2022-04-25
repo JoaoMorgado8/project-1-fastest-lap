@@ -1,7 +1,6 @@
 body {
-  background-image: "../docs/assets/imgs/tattoo.png";
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url("../docs/assets/imgs/tattoo.png") center no-repeat;
+  background-size: contain;
 }
 
 canvas {

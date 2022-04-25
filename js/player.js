@@ -63,6 +63,21 @@ class Obstacle {
     this.height = 50;
   }
 
+  left() {
+    return this.x;
+  }
+  right() {
+    return this.x + this.width;
+  }
+
+  top() {
+    return this.y;
+  }
+
+  bottom() {
+    return this.y + this.height;
+  }
+
   draw() {
     this.game.ctx.fillStyle = "black";
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
