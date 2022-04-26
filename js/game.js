@@ -25,7 +25,8 @@ class Game {
     this.toClean = [];
     this.time = 60;
     this.speed = 1;
-    this.score = 0;
+    this.increments = 0;
+    this.finish = new Finish(this);
   }
 
   start() {
@@ -57,8 +58,19 @@ class Game {
     });
     this.checkCrash();
     this.timer();
-    this.score += this.speed;
-    console.log(this.score);
+    this.increments += this.speed;
+    console.log(this.increments);
+    if (this.increments >= 5000) {
+      this.finish.draw();
+      this.finish.y += this.speed;
+    }
+    this.checkWin();
+  }
+
+  checkWin() {
+    if (this.car.y <= this.finish.bottom()) {
+      this.stop();
+    }
   }
 
   createObstacles() {
@@ -90,7 +102,12 @@ class Game {
     }
   }
 
-  //createFinish() {}
+  // createFinish() {
+  //   finishLine.draw();
+  //   // this.background.src =
+  //   //   "../docs/assets/imgs/finish-line-removebg-preview.png";
+  //   // this.ctx.drawImage(this.background, this.x, this.y, 400, 20);
+  // }
 
   checkCrash() {
     const player = this.car;
