@@ -22,9 +22,10 @@ class Game {
     this.controls = null;
     this.enemies = [];
     this.frames = 0;
-    this.finish = [];
     this.toClean = [];
     this.time = 60;
+    this.speed = 1;
+    this.score = 0;
   }
 
   start() {
@@ -43,18 +44,21 @@ class Game {
     this.createObstacles();
     this.enemies.forEach((enemy, i) => {
       if (this.car.y < 100) {
-        enemy.y += 25;
+        this.speed = 25;
       } else if (this.car.y < 300) {
-        enemy.y += 10;
+        this.speed = 10;
       } else if (this.car.y < 460) {
-        enemy.y += 5;
-      } else enemy.y++;
+        this.speed = 5;
+      } else this.speed = 1;
+      enemy.y += this.speed;
 
       if (enemy.y > 650) this.enemies.splice(i, 1);
       enemy.draw();
     });
     this.checkCrash();
     this.timer();
+    this.score += this.speed;
+    console.log(this.score);
   }
 
   createObstacles() {
