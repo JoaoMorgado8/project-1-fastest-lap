@@ -24,6 +24,7 @@ class Game {
     this.frames = 0;
     this.finish = [];
     this.toClean = [];
+    this.time = 60;
   }
 
   start() {
@@ -53,6 +54,7 @@ class Game {
       enemy.draw();
     });
     this.checkCrash();
+    this.timer();
   }
 
   createObstacles() {
@@ -74,29 +76,24 @@ class Game {
     }
   }
 
-  //counter() {}
+  timer() {
+    this.time = 60 - Math.floor(this.frames / 60);
+    this.ctx.font = "32px console";
+    this.ctx.fillStyle = "yellow";
+    this.ctx.fillText(`Time: ${this.time}`, 100, 30);
+    if (this.time <= 0) {
+      this.stop();
+    }
+  }
 
   //createFinish() {}
 
   checkCrash() {
-    //const car = this.car;
-    /* this.enemies.forEach((enemy) => {
-      if (this.car.crashWith(enemy)) {
-        //console.log(this.toClean);
-        this.toClean.unshift(enemy);
-      }
-    });
-    console.log(this.toClean);
-    this.toClean = [];
-  } */
-
     const player = this.car;
 
     const crashed = this.enemies.some((enemy, i) => {
       if (player.crashWith(enemy)) {
-        console.log("antes", this.enemies);
         this.enemies.splice(i, 1);
-        console.log("depois", this.enemies);
       }
       return player.crashWith(enemy);
     });
@@ -104,12 +101,6 @@ class Game {
       this.car.y += 100;
     }
   }
-
-  /* slowDown() {
-    if()
-    this.car.y += 5;
-  } // the player when */ //crashed with the obstacle, should be draged along with it,  but still be able to escape when moveFw()
-  // also when the player escapes the object, the moveBw() or the y++ should stop
 
   stop() {
     clearInterval(this.intervalId);
