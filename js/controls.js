@@ -13,7 +13,7 @@ class Controls {
           }
           break;
         case "ArrowLeft":
-          if (this.car.x > 15) {
+          if (this.car.x > 20) {
             this.car.moveLeft();
           }
           break;

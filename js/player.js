@@ -6,7 +6,6 @@ class Player {
     this.width = width;
     this.height = height;
     this.color = color;
-    this.speedY = 0;
   }
 
   draw() {
@@ -32,7 +31,6 @@ class Player {
   left() {
     return this.x;
   }
-
   right() {
     return this.x + this.width;
   }
@@ -40,8 +38,9 @@ class Player {
   top() {
     return this.y;
   }
+
   bottom() {
-    this.y + this.height;
+    return this.y + this.height;
   }
 
   crashWith(obstacle) {
@@ -87,9 +86,9 @@ class Obstacle {
 class Finish {
   constructor(game) {
     this.game = game;
-    this.x = 0;
+    this.x = 10;
     this.y = 0;
-    this.width = 420;
+    this.width = 400;
     this.height = 10;
   }
 
