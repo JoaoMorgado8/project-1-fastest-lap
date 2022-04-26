@@ -8,12 +8,12 @@ class Controls {
     window.addEventListener("keydown", (e) => {
       switch (e.code) {
         case "ArrowRight":
-          if (this.car.x + this.car.width < 400) {
+          if (this.car.x + this.car.width < 380) {
             this.car.moveRight();
           }
           break;
         case "ArrowLeft":
-          if (this.car.x > 20) {
+          if (this.car.x > 15) {
             this.car.moveLeft();
           }
           break;

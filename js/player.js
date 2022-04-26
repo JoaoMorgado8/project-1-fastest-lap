@@ -15,18 +15,18 @@ class Player {
   }
 
   moveFw() {
-    this.y -= 10;
+    this.y -= 20;
   }
 
   moveBw() {
-    this.y += 10;
+    this.y += 20;
   }
 
   moveLeft() {
-    this.x -= 10;
+    this.x -= 80;
   }
   moveRight() {
-    this.x += 10;
+    this.x += 80;
   }
 
   left() {
@@ -59,8 +59,8 @@ class Obstacle {
     this.game = game;
     this.x = Math.floor(Math.random() * 400);
     this.y = 0;
-    this.width = 50;
-    this.height = 50;
+    this.width = 45;
+    this.height = 45;
   }
 
   left() {
@@ -80,6 +80,25 @@ class Obstacle {
 
   draw() {
     this.game.ctx.fillStyle = "black";
+    this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+}
+
+class Finish {
+  constructor(game) {
+    this.game = game;
+    this.x = 0;
+    this.y = 0;
+    this.width = 420;
+    this.height = 10;
+  }
+
+  bottom() {
+    return this.y + this.height;
+  }
+
+  draw() {
+    this.game.ctx.fillStyle = "red";
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 }

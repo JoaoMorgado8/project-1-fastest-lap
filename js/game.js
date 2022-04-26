@@ -22,10 +22,11 @@ class Game {
     this.controls = null;
     this.enemies = [];
     this.frames = 0;
+    this.finish = [];
   }
 
   start() {
-    this.car = new Player(this, 175, 550, 75, 75, "purple");
+    this.car = new Player(this, 175, 550, 80, 80, "purple");
     this.controls = new Controls(this);
     this.controls.keyboardEvents();
     this.intervalId = setInterval(() => {
@@ -52,7 +53,20 @@ class Game {
   }
 
   createObstacles() {
-    if (this.frames % 200 === 0) {
+    if (this.car.y < 100) {
+      if (this.frames % 50 === 0) {
+        this.enemies.push(new Obstacle(this));
+      }
+    } else if (this.car.y < 300) {
+      if (this.frames % 80 === 0) {
+        this.enemies.push(new Obstacle(this));
+      }
+    } else if (this.car.y < 460) {
+      if (this.frames % 100 === 0) {
+        this.enemies.push(new Obstacle(this));
+      }
+    }
+    if (this.frames % 150 === 0) {
       this.enemies.push(new Obstacle(this));
     }
   }
