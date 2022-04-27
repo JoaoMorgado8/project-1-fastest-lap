@@ -13,6 +13,7 @@ class Game {
   constructor() {
     this.canvas = document.getElementById("canvas");
     this.ctx = this.canvas.getContext("2d");
+    this.background = new Image();
     this.x = 0;
     this.y = 0;
     this.width = 420;
@@ -22,17 +23,18 @@ class Game {
     this.controls = null;
     this.enemies = [];
     this.frames = 0;
-    this.toClean = [];
     this.time = 60;
     this.speed = 1;
     this.increments = 0;
     this.finish = new Finish(this);
+    this.soundEfx = new Audio("../docs/assets/sounds/effect.mp3");
   }
 
   start() {
-    this.car = new Player(this, 175, 550, 80, 80, "purple");
+    this.car = new Player(this, 175, 550, 80, 100, "purple");
     this.controls = new Controls(this);
     this.controls.keyboardEvents();
+    this.soundEfx.play();
     this.intervalId = setInterval(() => {
       this.update();
     }, 1000 / 60);
@@ -41,12 +43,13 @@ class Game {
   update() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.frames++;
+    this.drawBackground();
     this.car.draw();
     this.createObstacles();
     this.enemies.forEach((enemy, i) => {
-      if (this.car.y < 100) {
+      if (this.car.y < 160) {
         this.speed = 25;
-      } else if (this.car.y < 300) {
+      } else if (this.car.y < 320) {
         this.speed = 10;
       } else if (this.car.y < 460) {
         this.speed = 5;
@@ -56,11 +59,12 @@ class Game {
       if (enemy.y > 650) this.enemies.splice(i, 1);
       enemy.draw();
     });
+    this.soundEfx.play();
     this.checkCrash();
     this.timer();
     this.increments += this.speed;
     console.log(this.increments);
-    if (this.increments >= 5000) {
+    if (this.increments >= 28000) {
       this.finish.draw();
       this.finish.y += this.speed;
     }
@@ -73,12 +77,23 @@ class Game {
     }
   }
 
+  drawBackground() {
+    this.background.src = "../docs/assets/imgs/race_background.png";
+    this.ctx.drawImage(
+      this.background,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
+  }
+
   createObstacles() {
-    if (this.car.y < 100) {
+    if (this.car.y < 160) {
       if (this.frames % 50 === 0) {
         this.enemies.push(new Obstacle(this));
       }
-    } else if (this.car.y < 300) {
+    } else if (this.car.y < 320) {
       if (this.frames % 80 === 0) {
         this.enemies.push(new Obstacle(this));
       }
@@ -93,21 +108,15 @@ class Game {
   }
 
   timer() {
+    //this.time = 60.000 - this.frames / 60;
     this.time = 60 - Math.floor(this.frames / 60);
     this.ctx.font = "32px console";
-    this.ctx.fillStyle = "yellow";
-    this.ctx.fillText(`Time: ${this.time}`, 100, 30);
+    this.ctx.fillStyle = "#23FE01";
+    this.ctx.fillText(`Time: ${this.time}`, 120, 50);
     if (this.time <= 0) {
       this.stop();
     }
   }
-
-  // createFinish() {
-  //   finishLine.draw();
-  //   // this.background.src =
-  //   //   "../docs/assets/imgs/finish-line-removebg-preview.png";
-  //   // this.ctx.drawImage(this.background, this.x, this.y, 400, 20);
-  // }
 
   checkCrash() {
     const player = this.car;
@@ -119,11 +128,12 @@ class Game {
       return player.crashWith(enemy);
     });
     if (crashed) {
-      this.car.y += 100;
+      this.car.y += 160;
     }
   }
 
   stop() {
     clearInterval(this.intervalId);
+    this.soundEfx.pause();
   }
 }
