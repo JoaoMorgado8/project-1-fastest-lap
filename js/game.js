@@ -28,7 +28,7 @@ class Game {
     this.speed = 1;
     this.increments = 0;
     this.finish = new Finish(this);
-    this.soundEfx = new Audio("docs/assets/sounds/effect.mp3");
+    this.soundEfx = new Audio("./docs/assets/sounds/effect.mp3");
   }
 
   start() {
@@ -79,7 +79,7 @@ class Game {
   }
 
   drawBackground() {
-    this.background.src = "docs/assets/img/race_background.png";
+    this.background.src = "./docs/assets/img/race_background.png";
     this.ctx.drawImage(
       this.background,
       this.x,

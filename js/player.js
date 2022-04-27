@@ -9,7 +9,7 @@ class Player {
   }
 
   draw() {
-    this.img.src = "docs/assets/img/minami.png";
+    this.img.src = "./docs/assets/img/minami.png";
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
@@ -79,7 +79,7 @@ class Obstacle {
   }
 
   draw() {
-    this.img.src = "docs/assets/img/oil_puddle.png";
+    this.img.src = "./docs/assets/img/oil_puddle.png";
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
@@ -99,7 +99,7 @@ class Finish {
   }
 
   draw() {
-    this.img.src = "docs/assets/img/finish.png";
+    this.img.src = "./docs/assets/img/finish.png";
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
