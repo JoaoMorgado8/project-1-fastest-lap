@@ -79,7 +79,7 @@ class Game {
   }
 
   drawBackground() {
-    this.background.src = "./docs/assets/imgs/race_background.png";
+    this.background.src = "./docs/assets/img/race_background.png";
     this.ctx.drawImage(
       this.background,
       this.x,
@@ -110,7 +110,7 @@ class Game {
 
   timer() {
     this.time = 0 + Math.floor(this.frames / 60);
-    this.milliseconds = this.frames % 100;
+    this.milliseconds = this.frames % 1000;
     this.ctx.font = "32px console";
     this.ctx.fillStyle = "#23FE01";
     this.ctx.fillText(`Time: ${this.time}:${this.milliseconds}`, 120, 50);
