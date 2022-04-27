@@ -23,11 +23,12 @@ class Game {
     this.controls = null;
     this.enemies = [];
     this.frames = 0;
-    this.time = 60;
+    this.time = 0;
+    this.milliseconds = 0;
     this.speed = 1;
     this.increments = 0;
     this.finish = new Finish(this);
-    this.soundEfx = new Audio("../docs/assets/sounds/effect.mp3");
+    this.soundEfx = new Audio("./docs/assets/sounds/effect.mp3");
   }
 
   start() {
@@ -64,7 +65,7 @@ class Game {
     this.timer();
     this.increments += this.speed;
     console.log(this.increments);
-    if (this.increments >= 28000) {
+    if (this.increments >= 23000) {
       this.finish.draw();
       this.finish.y += this.speed;
     }
@@ -78,7 +79,7 @@ class Game {
   }
 
   drawBackground() {
-    this.background.src = "../docs/assets/imgs/race_background.png";
+    this.background.src = "./docs/assets/imgs/race_background.png";
     this.ctx.drawImage(
       this.background,
       this.x,
@@ -108,12 +109,12 @@ class Game {
   }
 
   timer() {
-    //this.time = 60.000 - this.frames / 60;
-    this.time = 60 - Math.floor(this.frames / 60);
+    this.time = 0 + Math.floor(this.frames / 60);
+    this.milliseconds = this.frames % 100;
     this.ctx.font = "32px console";
     this.ctx.fillStyle = "#23FE01";
-    this.ctx.fillText(`Time: ${this.time}`, 120, 50);
-    if (this.time <= 0) {
+    this.ctx.fillText(`Time: ${this.time}:${this.milliseconds}`, 120, 50);
+    if (this.time >= 60) {
       this.stop();
     }
   }
