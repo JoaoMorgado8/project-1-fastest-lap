@@ -30,6 +30,22 @@ class Game {
     this.increments = 0;
     this.finish = new Finish(this);
     this.soundEfx = new Audio("./docs/assets/sounds/effect.mp3");
+    //this.spun = new Image();
+    const spun = new Image();
+    spun.addEventListener("load", () => {
+      this.spun = spun;
+    });
+    spun.src = "./docs/assets/img/spun.png";
+    const won = new Image();
+    won.addEventListener("load", () => {
+      this.won = won;
+    });
+    won.src = "./docs/assets/img/lewis-removebg-preview.png";
+    const slow = new Image();
+    slow.addEventListener("load", () => {
+      this.slow = slow;
+    });
+    slow.src = "./docs/assets/img/bean.png";
   }
 
   start() {
@@ -74,7 +90,6 @@ class Game {
     this.car.draw();
     this.timer();
     this.checkWin();
-
     this.checkOut();
   }
 
@@ -84,12 +99,13 @@ class Game {
       //this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.fillStyle = "rgb(30, 255, 0, 0.5)";
       this.ctx.fillRect(0, 0, this.width, this.height);
-      this.ctx.font = "32px console";
+      this.ctx.font = "32px roboto";
       this.ctx.fillStyle = "black";
       this.ctx.fillText(`Good job!`, 150, 270);
-      this.ctx.font = "30px console";
+      this.ctx.font = "30px roboto";
       this.ctx.fillStyle = "black";
-      this.ctx.fillText(`You did it in :${this.time} sec`, 40, 320);
+      this.ctx.fillText(`You did it in: ${this.time} sec`, 40, 320);
+      this.ctx.drawImage(this.won, -50, 340, 600, 320);
     }
   }
 
@@ -120,20 +136,21 @@ class Game {
   timer() {
     this.time = 0 + Math.floor(this.frames / 60);
     //this.milliseconds = this.frames % 1000;
-    this.ctx.font = "32px console";
+    this.ctx.font = "32px roboto";
     this.ctx.fillStyle = "#23FE01";
     this.ctx.fillText(`Time: ${this.time}`, 120, 50);
     if (this.time >= 60) {
       this.stop();
       this.ctx.clearRect(0, 0, this.width, this.height);
-      this.ctx.fillStyle = "red";
+      this.ctx.fillStyle = "blue";
       this.ctx.fillRect(0, 0, this.width, this.height);
-      this.ctx.font = "32px console";
+      this.ctx.drawImage(this.slow, this.x, this.y, this.width, this.height);
+      /* this.ctx.font = "32px roboto";
       this.ctx.fillStyle = "black";
       this.ctx.fillText(`So slow!`, 150, 270);
-      this.ctx.font = "30px console";
+      this.ctx.font = "30px roboto";
       this.ctx.fillStyle = "black";
-      this.ctx.fillText(`Try again!`, 130, 320);
+      this.ctx.fillText(`Try again!`, 130, 320); */
     }
   }
 
@@ -143,12 +160,15 @@ class Game {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.fillStyle = "red";
       this.ctx.fillRect(0, 0, this.width, this.height);
-      this.ctx.font = "26px console";
+      this.ctx.drawImage(this.spun, this.x, this.y, this.width, this.height);
+      /* this.ctx.fillStyle = "red";
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      this.ctx.font = "26px roboto";
       this.ctx.fillStyle = "black";
       this.ctx.fillText(`You spuned out!`, 100, 270);
       this.ctx.font = "30px console";
       this.ctx.fillStyle = "black";
-      this.ctx.fillText(`Try again!`, 130, 320);
+      this.ctx.fillText(`Try again!`, 130, 320); */
     }
   }
 
