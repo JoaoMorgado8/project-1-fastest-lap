@@ -4,6 +4,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  font-family: "Roboto Mono", monospace;
 }
 
 canvas {
