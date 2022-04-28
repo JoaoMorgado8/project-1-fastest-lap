@@ -18,7 +18,7 @@ class Controls {
           }
           break;
         case "ArrowUp":
-          if (this.car.y > 20) {
+          if (this.car.y > 100) {
             this.car.moveFw();
           }
           break;

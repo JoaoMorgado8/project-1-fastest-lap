@@ -67,7 +67,7 @@ class Game {
 
     this.increments += this.speed;
     console.log(this.increments);
-    if (this.increments >= 23000) {
+    if (this.increments >= 27000) {
       this.finish.draw();
       this.finish.y += this.speed;
     }
@@ -100,7 +100,7 @@ class Game {
 
   createObstacles() {
     if (this.car.y < 160) {
-      if (this.frames % 50 === 0) {
+      if (this.frames % 30 === 0) {
         this.enemies.push(new Obstacle(this));
       }
     } else if (this.car.y < 320) {
