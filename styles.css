@@ -29,3 +29,17 @@ canvas {
 .logo {
   width: 250px;
 }
+
+#start-button {
+  background-color: rgba(240, 248, 255, 0);
+  border: 2.5px solid black;
+  font-family: "Roboto Mono", monospace;
+  border-radius: 5px;
+  width: 130px;
+}
+
+.ig {
+  font-size: smaller;
+  text-decoration: none;
+  color: black;
+}
