@@ -136,7 +136,7 @@ class Game {
   timer() {
     this.time = 0 + Math.floor(this.frames / 60);
     //this.milliseconds = this.frames % 1000;
-    this.ctx.font = "32px roboto";
+    this.ctx.font = "32px Roboto Mono";
     this.ctx.fillStyle = "#23FE01";
     this.ctx.fillText(`Time: ${this.time}`, 120, 50);
     if (this.time >= 60) {

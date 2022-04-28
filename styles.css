@@ -9,6 +9,7 @@ body {
 
 canvas {
   border: 5px solid rgb(30, 255, 0);
+  font-family: "Roboto Mono", monospace;
 }
 
 .instructions {
