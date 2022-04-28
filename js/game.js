@@ -19,6 +19,7 @@ class Game {
     this.width = 420;
     this.height = 650;
     this.intervalId = null;
+    //this.milliInterval = 0;
     this.car = null;
     this.controls = null;
     this.enemies = [];
@@ -39,6 +40,7 @@ class Game {
     this.intervalId = setInterval(() => {
       this.update();
     }, 1000 / 60);
+    //this.milliInterval =
   }
 
   update() {
@@ -70,11 +72,21 @@ class Game {
       this.finish.y += this.speed;
     }
     this.checkWin();
+    this.checkOut();
   }
 
   checkWin() {
     if (this.car.y <= this.finish.bottom()) {
       this.stop();
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.ctx.fillStyle = "rgb(30, 255, 0)";
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      this.ctx.font = "32px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`Good job!`, 150, 270);
+      this.ctx.font = "30px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`You did it in :${this.time} sec`, 40, 320);
     }
   }
 
@@ -116,6 +128,30 @@ class Game {
     this.ctx.fillText(`Time: ${this.time}:${this.milliseconds}`, 120, 50);
     if (this.time >= 60) {
       this.stop();
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.ctx.fillStyle = "red";
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      this.ctx.font = "32px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`So slow!`, 150, 270);
+      this.ctx.font = "30px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`Try again!`, 130, 320);
+    }
+  }
+
+  checkOut() {
+    if (this.car.y > this.canvas.height) {
+      this.stop();
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.ctx.fillStyle = "red";
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      this.ctx.font = "26px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`You spuned out!`, 100, 270);
+      this.ctx.font = "30px console";
+      this.ctx.fillStyle = "black";
+      this.ctx.fillText(`Try again!`, 130, 320);
     }
   }
 
