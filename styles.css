@@ -7,7 +7,7 @@ body {
 }
 
 canvas {
-  border: 2px solid rgb(30, 255, 0);
+  border: 5px solid rgb(30, 255, 0);
 }
 
 .instructions {

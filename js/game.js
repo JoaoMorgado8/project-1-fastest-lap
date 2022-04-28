@@ -47,7 +47,7 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.frames++;
     this.drawBackground();
-    this.car.draw();
+
     this.createObstacles();
     this.enemies.forEach((enemy, i) => {
       if (this.car.y < 160) {
@@ -64,22 +64,25 @@ class Game {
     });
     this.soundEfx.play();
     this.checkCrash();
-    this.timer();
+
     this.increments += this.speed;
     console.log(this.increments);
     if (this.increments >= 23000) {
       this.finish.draw();
       this.finish.y += this.speed;
     }
+    this.car.draw();
+    this.timer();
     this.checkWin();
+
     this.checkOut();
   }
 
   checkWin() {
-    if (this.car.y <= this.finish.bottom()) {
+    if (this.car.bottom() <= this.finish.bottom()) {
       this.stop();
-      this.ctx.clearRect(0, 0, this.width, this.height);
-      this.ctx.fillStyle = "rgb(30, 255, 0)";
+      //this.ctx.clearRect(0, 0, this.width, this.height);
+      this.ctx.fillStyle = "rgb(30, 255, 0, 0.5)";
       this.ctx.fillRect(0, 0, this.width, this.height);
       this.ctx.font = "32px console";
       this.ctx.fillStyle = "black";
@@ -92,13 +95,7 @@ class Game {
 
   drawBackground() {
     this.background.src = "./docs/assets/img/race_background.png";
-    this.ctx.drawImage(
-      this.background,
-      this.x,
-      this.y,
-      this.width,
-      this.height
-    );
+    this.ctx.drawImage(this.background, this.x, -10, this.width, 680);
   }
 
   createObstacles() {
@@ -122,10 +119,10 @@ class Game {
 
   timer() {
     this.time = 0 + Math.floor(this.frames / 60);
-    this.milliseconds = this.frames % 1000;
+    //this.milliseconds = this.frames % 1000;
     this.ctx.font = "32px console";
     this.ctx.fillStyle = "#23FE01";
-    this.ctx.fillText(`Time: ${this.time}:${this.milliseconds}`, 120, 50);
+    this.ctx.fillText(`Time: ${this.time}`, 120, 50);
     if (this.time >= 60) {
       this.stop();
       this.ctx.clearRect(0, 0, this.width, this.height);
